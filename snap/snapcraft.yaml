@@ -1,5 +1,5 @@
 name: nebula
-version: v1.3.0
+version: v1.4.0
 
 summary: A scalable overlay networking tool.
 
@@ -34,19 +34,19 @@ parts:
 
 apps:
   nebula:
-    command: bin/nebula -config $SNAP_COMMON/config/config.yaml
+    command: bin/nebula -config $SNAP_DATA/config/config.yaml
     plugs:
       - network
       - network-control
   
   cert-ca:
-    command: bin/nebula-cert ca -out-crt $SNAP_COMMON/certs/ca.crt -out-key $SNAP_COMMON/certs/ca.key
+    command: bin/nebula-cert ca -out-crt $SNAP_DATA/certs/ca.crt -out-key $SNAP_DATA/certs/ca.key
 
   cert-sign:
-    command: bin/nebula-cert sign -ca-crt $SNAP_COMMON/certs/ca.crt -ca-key $SNAP_COMMON/certs/ca.key -out-crt $SNAP_COMMON/certs/nebula-node.crt -out-key $SNAP_COMMON/certs/nebula-node.key
+    command: bin/nebula-cert sign -ca-crt $SNAP_DATA/certs/ca.crt -ca-key $SNAP_DATA/certs/ca.key -out-crt $SNAP_DATA/certs/nebula-node.crt -out-key $SNAP_DATA/certs/nebula-node.key
 
   daemon:
-    command: bin/nebula -config $SNAP_COMMON/config/config.yaml
+    command: bin/nebula -config $SNAP_DATA/config/config.yaml
     daemon: simple
     plugs:
       - network
@@ -54,4 +54,4 @@ apps:
 
 layout:
   /etc/nebula:
-    bind: $SNAP_COMMON
+    bind: $SNAP_DATA
